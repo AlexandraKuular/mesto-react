@@ -38,8 +38,8 @@ class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: userInfo.fullname,
-        about: userInfo.identity
+        name: userInfo.name,
+        about: userInfo.about
       })
     })
     .then(this._checkRes);
@@ -52,7 +52,7 @@ class Api {
       headers: this._headers,
       'Content-Type': 'application/json',
       body: JSON.stringify({
-        name: card.imgName,
+        name: card.name,
         link: card.link
       })
     })
@@ -60,12 +60,12 @@ class Api {
   }
 
     //Обновление аватара
-    changeAvatar(avatar) {
+    changeAvatar(data) {
       return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: "PATCH",
         headers: this._headers,
         body: JSON.stringify({
-          avatar: avatar
+          avatar: data.avatar
         })
       })
       .then(this._checkRes);
@@ -99,7 +99,7 @@ class Api {
   }
 
   likeCard({idCard, isLiked}) {
-    if (isLiked()) {
+    if (isLiked) {
       return this._deleteLike(idCard);
     }
     return this._putLike(idCard);
