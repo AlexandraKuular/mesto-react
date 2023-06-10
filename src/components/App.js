@@ -65,23 +65,14 @@ function App() {
   }
 
   useEffect(() => {
-    api
-      .getInitialCards()
-      .then((item) => {
-        setCards(item);
-      })
-      .catch((err) => {console.log(err)});
+    Promise.all([api.getInitialCards(), api.getUserInfo()])
+        .then(([item, data]) => {
+          setCards(item);
+          setCurrentUser(data);
+        })
+        .catch((err) => {console.log(err)});
   }, []);
 
-  useEffect(() => {
-    api
-      .getUserInfo()
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch((err) => {console.log(err)});
-  }, []);
-  
   function handleUpdateUser({name, about}) {
     api
       .setUserInfo({name, about})

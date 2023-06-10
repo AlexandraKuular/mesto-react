@@ -13,7 +13,7 @@ function PopupWithForm(props) {
           />
         </button>
         <h2 className="popup__container-edit">{props.title}</h2>
-        <form className={`popup__form popup__form-${props.name}`} name={props.name} onSubmit={props.onSubmit} noValidate>
+        <form className={`popup__form popup__form-${props.name}`} name={props.name} onSubmit={props.onSubmit}>
           {props.children}
           <button className="popup__btn-save" type="submit">{props.textBtn}</button>
         </form>
